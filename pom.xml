@@ -10,6 +10,7 @@
     <modules>
         <module>cloud-provider-payment8001</module>
         <module>cloud-consumer-order80</module>
+        <module>cloud-provider-payment8002</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -28,6 +29,8 @@
 
         <hutool.version>5.5.1</hutool.version>
         <mybatisplus.version>3.1.2</mybatisplus.version>
+        <cloud.alibaba.version>2.1.0.RELEASE</cloud.alibaba.version>
+        <alibaba.nacos.version>2.1.0.RELEASE</alibaba.nacos.version>
     </properties>
 
     <!-- 子模块继承之后，提供作用：锁定版本+子module不用写groupId和version  -->
@@ -98,6 +101,19 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatisplus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${cloud.alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${alibaba.nacos.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
