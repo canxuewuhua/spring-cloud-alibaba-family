@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.huolieniao.springcloud.dao.PersonDao">
+
+    <resultMap id="BaseResultMap" type="com.huolieniao.springcloud.entities.Person">
+        <id column="person_id" property="personId" jdbcType="INTEGER"/>
+        <id column="first_name" property="firstName" jdbcType="VARCHAR"/>
+        <id column="last_name" property="lastName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="getPersonById" parameterType="Integer" resultMap="BaseResultMap">
+        select * from person where person_id=#{id};
+    </select>
+
+</mapper>
+
+
