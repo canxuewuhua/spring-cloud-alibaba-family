@@ -10,6 +10,6 @@ public class OrderController {
 
     @GetMapping("msg")
     public String getMsg(){
-        return "this is message";
+        return "this is message...";
     }
 }
