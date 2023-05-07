@@ -39,3 +39,8 @@ http://localhost:8848/nacos
 此时还没有消费者调用提供者 后续通过openFeign进行调用
 当前了解学习nacos的服务配置 命名空间 dataId group分组方案 namespace 以及集群 持久化 nacos的linux安装等相关的学习
 Eureka是CP Zookeeper是AP  nacos是既支持CP 也支持AP
+
+cloud-config-nacos-client3377可以不启动 它只是配置中心的使用
+Ribbon和nginx区别   nginx是服务端实现的 是档在最外面的  Ribbon是本地负载均衡
+
+Feign已经停更 目前使用最多的就是openFeign
