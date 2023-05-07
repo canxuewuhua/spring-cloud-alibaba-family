@@ -9,3 +9,13 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848 # 配置nacos地址
         namespace: d990d0b1-cec0-4267-8b91-fa3fd851affa
+ribbon:
+  #指的是建立连接所用的时间，适用于网络状况正常的情况下,两端连接所用的时间
+  ReadTimeout: 5000
+  #指的是建立连接后从服务器读取到可用资源所用的时间
+  ConnectTimeout: 5000
+
+logging:
+  level:
+    # feign日志以什么级别监控哪个接口
+    com.huolieniao.service.PaymentFeignService: debug

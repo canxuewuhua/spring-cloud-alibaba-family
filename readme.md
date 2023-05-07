@@ -44,3 +44,10 @@ cloud-config-nacos-client3377可以不启动 它只是配置中心的使用
 Ribbon和nginx区别   nginx是服务端实现的 是档在最外面的  Ribbon是本地负载均衡
 
 Feign已经停更 目前使用最多的就是openFeign
+
+openFeign内置Ribbon 也支持负载均衡 
+对于同一个服务名的多个服务的相同接口 会采用轮询方式进行调用
+客户端启动类开启@EnableFeignClients  接口上添加@FeignClient(value = "nacos-payment-provider")
+openFeign默认等待一秒钟 假如所调用的服务确实时间会长 会超过1秒钟 那么就需要设置openFeign的超时时间
+需要再yml文件中设置时间
+同时也可以定义 FeignConfig配置且在配置文件中开启debug日志监控

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 @RestController
 @RequestMapping("check")
 public class EmployeeController {
@@ -22,6 +24,11 @@ public class EmployeeController {
      */
     @GetMapping("count")
     public ResultDTO getEmployeeCount(){
+//        try{
+//            TimeUnit.SECONDS.sleep(2);
+//        }catch (Exception e){
+//            System.out.println("业务处理时间超过1秒钟");
+//        }
         return commonService.getEmployeeCount();
     }
 }
