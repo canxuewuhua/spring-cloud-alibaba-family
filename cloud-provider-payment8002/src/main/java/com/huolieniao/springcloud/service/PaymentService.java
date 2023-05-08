@@ -20,7 +20,7 @@ public class PaymentService {
      */
     public String paymentInfo_OK(Integer id)
     {
-        return "8001 线程池:  "+Thread.currentThread().getName()+"  paymentInfo_OK,id:  "+id+"\t"+"O(∩_∩)O哈哈~";
+        return "8002 线程池:  "+Thread.currentThread().getName()+"  paymentInfo_OK,id:  "+id+"\t"+"O(∩_∩)O哈哈~";
     }
 
     @HystrixCommand(fallbackMethod = "paymentInfo_TimeOutHandler",commandProperties = {
@@ -30,11 +30,11 @@ public class PaymentService {
     {
 //        int age = 10/0;  // 代码执行到这的时候 立马失败 则会走paymentInfo_TimeOutHandler方法
         try { TimeUnit.MILLISECONDS.sleep(5000); } catch (InterruptedException e) { e.printStackTrace(); }
-        return "线程池:  "+Thread.currentThread().getName()+" id:  "+id+"\t"+"O(∩_∩)O哈哈~"+"  耗时(秒): ";
+        return "8002 线程池:  "+Thread.currentThread().getName()+" id:  "+id+"\t"+"O(∩_∩)O哈哈~"+"  耗时(秒): ";
     }
     public String paymentInfo_TimeOutHandler(Integer id)
     {
-        return "线程池:  "+Thread.currentThread().getName()+"  8001系统繁忙或者运行报错，请稍后再试,id:  "+id+"\t"+"o(╥﹏╥)o";
+        return "线程池:  "+Thread.currentThread().getName()+"  8002系统繁忙或者运行报错，请稍后再试,id:  "+id+"\t"+"o(╥﹏╥)o";
     }
 
     //=====服务熔断
@@ -48,18 +48,19 @@ public class PaymentService {
     {
         if(id < 0)
         {
-            throw new RuntimeException("8001 ******id 不能负数");
+            throw new RuntimeException("8002 ******id 不能负数");
         }
         String serialNumber = IdUtil.simpleUUID();
 
-        return Thread.currentThread().getName()+"\t"+"8001 调用成功，流水号: " + serialNumber;
+        return Thread.currentThread().getName()+"\t"+"8002 调用成功，流水号: " + serialNumber;
     }
     public String paymentCircuitBreaker_fallback(@PathVariable("id") Integer id)
     {
-        return "8001 id 不能负数，请稍后再试，/(ㄒoㄒ)/~~   id: " +id;
+        return "8002 id 不能负数，请稍后再试，/(ㄒoㄒ)/~~   id: " +id;
     }
 
     public String getPaymentEmp(){
-        return "8001 员工编码:001,员工姓名：张三丰，员工年龄：33";
+        return "8002 员工编码:001,员工姓名：张三丰，员工年龄：33";
     }
 }
+

@@ -76,6 +76,11 @@ public class OrderController {
         return paymentFeignService.getPaymentEmp();
     }
 
+    /**
+     * 服务熔断案例
+     * @param id
+     * @return
+     */
     @GetMapping("/payment/circuit/{id}")
     public String paymentCircuitBreaker(@PathVariable("id") Integer id){
         return paymentFeignService.paymentCircuitBreaker(id);
