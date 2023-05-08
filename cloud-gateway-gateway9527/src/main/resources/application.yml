@@ -16,9 +16,9 @@ spring:
       routes:
         - id: payment_routh #payment_route    #路由的ID，没有固定规则但要求唯一，建议配合服务名
           # uri: http://localhost:8001          #匹配后提供服务的路由地址
-          uri: lb://nacos-payment-provider #匹配后提供服务的路由地址
+          uri: lb://nacos-order-consumer #匹配后提供服务的路由地址
           predicates:
-            - Path=/payment/employee         # 断言，路径相匹配的进行路由
+            - Path=/order/payment/employee         # 断言，路径相匹配的进行路由
             - After=2023-05-08T16:13:38.487+08:00[Asia/Shanghai]
             #- Cookie=username,zhuyq
             #- Header=X-Request-Id, \d+  # 请求头要有X-Request-Id属性并且值为整数的正则表达式
