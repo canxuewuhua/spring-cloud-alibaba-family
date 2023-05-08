@@ -7,7 +7,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848 # 配置nacos地址
+        server-addr: 127.0.0.1:8848
         namespace: d990d0b1-cec0-4267-8b91-fa3fd851affa
 ribbon:
   #指的是建立连接所用的时间，适用于网络状况正常的情况下,两端连接所用的时间
