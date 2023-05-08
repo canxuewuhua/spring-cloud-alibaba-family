@@ -51,3 +51,26 @@ openFeign内置Ribbon 也支持负载均衡
 openFeign默认等待一秒钟 假如所调用的服务确实时间会长 会超过1秒钟 那么就需要设置openFeign的超时时间
 需要再yml文件中设置时间
 同时也可以定义 FeignConfig配置且在配置文件中开启debug日志监控
+
+hystrix目前也已经进入了维护模式了
+目前国外使用的是resilience4j
+国内使用的就是alibaba的sentinel了
+
+fallback 服务降级
+break 服务熔断 类似于家里的保险丝 跳闸断电
+flow limit 服务限流  秒杀高并发等操作 严禁一窝蜂的过来拥挤 大家排队
+
+2万个请求请求一个超时接口  结果造成正常的接口也被拖累变慢了
+原因：tomcat的默认的工作线程数被打满了，没有多余的线程来分解压力和处理了
+
+超时不再等待 友好返回
+出错要有兜底处理
+
+hystrix引入到服务提供者 或者服务消费方都是可以的 都可以起到降级的功效  但是一般都是放在消费客户端上做降级
+一般引入spring-cloud-starter-netflix-hystrix 依赖就可以
+
+注意点 （很关键）
+因为openFeign设置的超时时间为5秒
+那么如果在提供者侧hystrix的超时时间设置为5秒 业务执行6秒则不会执行fallback方法
+可能是先走了openFeign的超时异常返回了
+业务提供者要使用hystrix 需要开启@EnableCircuitBreaker注解
