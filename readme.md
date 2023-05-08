@@ -132,6 +132,15 @@ GateWay是springcloud出的 因为等不及nexflix的zuul2 自己开发的一套
 * 全局日志记录  比如说在请求之前加上一些处理或者日志打印
 * 统一网关鉴权  比如说对参数进行校验 鉴权操作
 
+下载sentinel1.7.0  使用命令 java -jar sentinel-dashboard-1.7.0.jar &   
+假设8080端口被占用了怎么办？
+mac解决端口被占用的方法为：
+sudo lsof -i tcp:8080  需要开机密码的 会需要输入开机密码
+之后
+COMMAND   PID  USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+java    23489 zhuyq  132u  IPv6 0xc361fb5080dda065      0t0  TCP *:http-alt (LISTEN)
+表示端口被占用 那么使用kill -9 23489 杀死该进程 就会被释放8080端口
+
 
 
 

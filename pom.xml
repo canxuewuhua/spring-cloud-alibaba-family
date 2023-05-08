@@ -13,6 +13,7 @@
         <module>cloud-provider-payment8002</module>
         <module>cloud-config-nacos-client3377</module>
         <module>cloud-gateway-gateway9527</module>
+        <module>cloudalibaba-sentinel-service8401</module>
     </modules>
     <packaging>pom</packaging>
 
