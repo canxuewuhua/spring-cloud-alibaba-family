@@ -117,3 +117,24 @@ http://localhost/order/payment/circuit/1 即使输入正确的参数1了也会�
 
 
 -------------- 此时只使用了一个提供侧8001  另外一个提供侧8002可以照着8001就行编写
+
+《学习微服务组件网关 GateWay》
+GateWay是springcloud出的 因为等不及nexflix的zuul2 自己开发的一套网关组件
+新建一个模块 cloud-gateway-gateway9527
+因为该模块是网关 不需要SpringBoot-web
+
+网关的三大核心概念  路由 断言 过滤器
+
+动态路由 route
+断言 predicates 就是对一些规则进行匹配 比如说请求头里需要带哪些信息 比如说请求发起的时间限制 header cookie path
+过滤器 filters 的作用就更大了 对请求参数和响应参数额外添加一些信息 还有
+* 自定义全局GlobalFilter 作用
+* 全局日志记录  比如说在请求之前加上一些处理或者日志打印
+* 统一网关鉴权  比如说对参数进行校验 鉴权操作
+
+
+
+
+
+
+
