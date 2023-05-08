@@ -58,4 +58,8 @@ public class PaymentService {
     {
         return "id 不能负数，请稍后再试，/(ㄒoㄒ)/~~   id: " +id;
     }
+
+    public String getPaymentEmp(){
+        return "员工编码:001,员工姓名：张三丰，员工年龄：33";
+    }
 }

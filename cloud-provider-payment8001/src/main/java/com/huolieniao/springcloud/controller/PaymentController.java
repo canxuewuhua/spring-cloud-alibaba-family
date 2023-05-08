@@ -38,4 +38,9 @@ public class PaymentController {
         log.info("****result: "+result);
         return result;
     }
+
+    @GetMapping("/payment/employee")
+    public String getPaymentEmp(){
+        return paymentService.getPaymentEmp();
+    }
 }

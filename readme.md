@@ -79,3 +79,38 @@ hystrix引入到服务提供者 或者服务消费方都是可以的 都可以�
 消费侧客户端需要引入hystrix依赖 另外配置文件中添加feign:hystrix:enabled: true  启动类上开启 @EnableHystrix注解
 
 ------- 另外注意：为避免运行结果各种问题 建议修改完代码后 重启提供者侧 也重启消费侧  -------
+
+注意一个问题：如果在消费侧配置了feign:hystrix:enabled: true 可能原有的在提供侧做降级的代码并没有执行
+可能是 要么在服务提供侧做降级   或者是   在消费侧做降级  不要同时做 需要再细作研究
+
+降级方法多了 会造成代码膨胀 及 代码混乱
+那么就需要配置全局的降级方法 合理的减少代码量
+
+代码膨胀的问题可以做全局的fallback 让走全局统一的降级方法 可以防止代码过多 同时定制化的降级再具体写
+全局的降级配置如下
+@DefaultProperties(defaultFallback = "payment_Global_FallBackMethod")
+然后    @GetMapping("/payment/employee")
+       @HystrixCommand
+即可 不需要再写一堆配置 定制化的按照之前的降级配置就行
+
+另外如果提供侧宕机或者关闭了 有没有方法走降级呢？
+有的 远程feign接口上设置
+@FeignClient(value = "nacos-payment-provider", fallback = PaymentFallbackService.class)
+编写一个实现类PaymentFallbackService实现PaymentFeignService接口
+在这个实现类中写的方法就是提供侧宕机或者关闭后的降级处理方法
+注意如果不是宕机 而是 超时或者错误还是走之前的@HystrixCommand配置
+
+服务熔断既可以做到消费端侧  也可以做在服务端侧
+close open half-open
+刚开始断路器是关闭的  当大量错误访问报异常了 那么断路器会开启 open
+此时的请求会走降级方法 断路器提供了参数  比如说 请求次数、时间窗口、请求失败率
+那么就是说 如果配置的在10秒 有6次请求失败 超过了60%错误率那么就会触发熔断 保险丝拉闸断电
+ 后续的请求都会走降级方法 即使是正确的请求过来也不会响应
+待超过了时间窗口 正确率上来了 那么会half-open 进而 close 关闭断路器 正常请求
+这是断路器的工作原理
+
+http://localhost/order/payment/circuit/-1 点击多次 超过60%的请求都是异常
+"id 不能负数，请稍后再试，/(ㄒoㄒ)/~~ id: -1"
+
+http://localhost/order/payment/circuit/1 即使输入正确的参数1了也会报上面的错误信息
+待等一段时间后 正确的参数1才会得到正确的响应结果！！！
