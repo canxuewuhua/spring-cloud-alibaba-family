@@ -142,6 +142,40 @@ java    23489 zhuyq  132u  IPv6 0xc361fb5080dda065      0t0  TCP *:http-alt (LIS
 表示端口被占用 那么使用kill -9 23489 杀死该进程 就会被释放8080端口
 
 
+sentinel
+
+======流控======
+对请求设置流控规则
+比如说QPS设置为1 则一秒一次可以 一秒多次就是出现 "Blocked by Sentinel (flow limiting)"提示
+![img_1.png](img_1.png)
+
+QPS是在外面的请求  线程数是进入到服务内 如银行网点 但是数量有限
+一个叫御敌于国门之外 一个叫做关门打狗
+
+B惹事 A挂
+
+预热 warmup  刚开始3个请求 5秒后 就允许10个请求了
+流控效果中的排队等待 即一秒一个
+
+======降级========
+sentinel的断路器是没有半开状态的 可能新版本有半开状态
+RT 异常比例 异常数三个降级策略
+
+热点规则 类似hystrix的降级方法fallback
+blockHandler 兜底方法
+
+控制台配置的违规行为 @SentinelResource来管
+但是异常程序的错误blockHandler兜底方法处理不了 而是通过fallback来处理
+
+fallback管运行异常
+blockHandler管配置违规
+若blockHandler和 fallback都进行了配置 则被限流降级而抛出BlockException时只会进入blockHandler处理逻辑
+exceptionToIgnore={IllegalArgumentException.class} 如果设置忽略则不会考虑该异常的fallback
+
+sentinel的持久化是持久化到nacos的 一个是依赖sentinel-datasource-nacos
+再一个是在配置文件中 配置 sentinel：datasource
+
+
 
 
 
