@@ -74,3 +74,8 @@ hystrix引入到服务提供者 或者服务消费方都是可以的 都可以�
 那么如果在提供者侧hystrix的超时时间设置为5秒 业务执行6秒则不会执行fallback方法
 可能是先走了openFeign的超时异常返回了
 业务提供者要使用hystrix 需要开启@EnableCircuitBreaker注解
+
+想让消费侧支持hystrix需要做到一下几点
+消费侧客户端需要引入hystrix依赖 另外配置文件中添加feign:hystrix:enabled: true  启动类上开启 @EnableHystrix注解
+
+------- 另外注意：为避免运行结果各种问题 建议修改完代码后 重启提供者侧 也重启消费侧  -------
