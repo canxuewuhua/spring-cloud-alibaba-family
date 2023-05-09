@@ -14,6 +14,9 @@
         <module>cloud-config-nacos-client3377</module>
         <module>cloud-gateway-gateway9527</module>
         <module>cloudalibaba-sentinel-service8401</module>
+        <module>cloudalibaba-consumer-nacos-order84</module>
+        <module>cloudalibaba-provider-payment9003</module>
+        <module>cloudalibaba-provider-payment9004</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -175,6 +175,35 @@ exceptionToIgnore={IllegalArgumentException.class} 如果设置忽略则不会�
 sentinel的持久化是持久化到nacos的 一个是依赖sentinel-datasource-nacos
 再一个是在配置文件中 配置 sentinel：datasource
 
+考虑再建一个工程 使用nacos openFeign sentinel的案例使用
+还有一个分布式事务 seata的案例使用
+
+sentinel再学习
+fallback管运行异常
+blockHandler管配置违规
+blockHandler既可以在同一个类中写方法 也可以指定类 并指定类的方法
+
+today 模拟consumer84服务 负载均衡调用服务提供者9003和9004 通过openFeign进行负载均衡调用
+通过验证@SentinelResource注解的 fallback和blockHandler 一个针对异常降级处理 一个是针对流控的降级处理
+想要sentinel持久化 还需在nacos上配置信息 记录持久化信息 这个暂时没有在nacos上配置 也很简单 后续使用到了再配置
+
+sentinel控制台上可以配置的信息有：
+针对接口路径客户已配置 流控 降级 热点key限流 
+流控里面有根据QPS 还是根据线程数  配置单机阈值
+流控模式 直接 关联 链路
+流控效果 快速失败 warm up 排队等待
+
+降级里面 有 资源名  配置降级策略： RT 异常比例 异常数  还有就是时间窗口进行组合
+
+热点规则 有 资源名 限流模式QPS 参数索引 单机阈值 统计窗口时长 是否集群 
+
+
+
+
+服务降级 服务熔断
+服务降级是针对异常或者超过阈值 返回一个温馨友好的提示
+服务熔断是当超过阈值 拉闸限电 此时即使正常的数据也会走降级方法  待过了时间窗口正常的数据多了 会关闭断路器正常执行
+
 
 
 

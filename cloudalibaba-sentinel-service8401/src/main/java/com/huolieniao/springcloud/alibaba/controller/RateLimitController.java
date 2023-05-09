@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @auther zzyy
- * @create 2020-02-25 15:04
+ *
+ * 按资源名称限流
+ * 按url限流
  */
 @RestController
 public class RateLimitController

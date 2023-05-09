@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 簇点链路 流控规则 降级规则 热点规则 系统规则 授权规则 集群流控
  */
 @RestController
 @Slf4j

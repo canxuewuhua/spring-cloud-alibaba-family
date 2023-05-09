@@ -4,6 +4,7 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.huolieniao.springcloud.alibaba.common.CommonResult;
 
 /**
+ * @SentinelResource blockHandlerClass = CustomerBlockHandler.class
  */
 public class CustomerBlockHandler
 {
